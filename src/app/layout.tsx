@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+
+//localFont
+import localFont from 'next/font/local'
 import "./globals.css";
+import { NavbarComponent } from "@/components/layout/navbar/NavbarComponent";
+import { Suspense } from "react";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+const googleSans = localFont({
+  src:'../fonts/google_sans_font_mediumitalics.ttf'
+})
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -21,9 +20,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${googleSans.className} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+      
+        <NavbarComponent/>
+        {children} 
+        <footer className="bg-blue-500">Footer</footer>
+      </body>
     </html>
   );
 }
